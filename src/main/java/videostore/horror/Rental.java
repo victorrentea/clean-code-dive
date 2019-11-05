@@ -1,5 +1,8 @@
 package videostore.horror;
 
+import java.util.Map;
+import java.util.function.Function;
+
 public class Rental {
     private final Movie movie;
     private final int daysRented;
@@ -16,21 +19,39 @@ public class Rental {
 
     public int calculateRenterPoints() {
         int frequentRenterPoints = 1;
-        boolean isNewRelease = movie.getPriceCode() == Movie.Type.NEW_RELEASE;
+        boolean isNewRelease = movie.getType() == Movie.Type.NEW_RELEASE;
         if (isNewRelease && daysRented >= 2) {
             frequentRenterPoints++;
         }
         return frequentRenterPoints;
     }
 
+//    public double calculatePrice() {
+////    	return movie.getType().computePrice(daysRented);
+//		switch (movie.getType()) {
+//			case REGULAR: return calculateRegularPrice();
+//			case NEW_RELEASE: return calculateNewReleasePrice();
+//			case CHILDRENS: return calculateChildrenPrice();
+//			default:
+//				throw new IllegalStateException("JDD: Unexpected value: " + movie.getType());
+//		}
+//
+//    }
+//    interface PriceCalculator {
+//		public double calculatePrice();
+//	}
+////    Map<Movie.Type, Function<Integer, Double>> m;
     public double calculatePrice() {
-        switch (movie.getPriceCode()) {
-            case REGULAR: return calculateRegularPrice();
+//		m.get()
+//    	return movie.getType().computePrice(daysRented);
+		switch (movie.getType()) {
+			case REGULAR: return calculateRegularPrice();
 			case NEW_RELEASE: return calculateNewReleasePrice();
-            case CHILDRENS: return calculateChildrenPrice();
+			case CHILDRENS: return calculateChildrenPrice();
 			default:
-                throw new IllegalStateException("JDD: Unexpected value: " + movie.getPriceCode());
-        }
+				throw new IllegalStateException("JDD: Unexpected value: " + movie.getType());
+		}
+
     }
 
 	private double calculateChildrenPrice() {
