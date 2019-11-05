@@ -1,21 +1,18 @@
 package videostore.horror;
 public class Movie {
-	public static final int CHILDRENS = 2;
-	public static final int REGULAR = 0;
-	public static final int NEW_RELEASE = 1;
 
 	enum Type {
-		CHILDREN, REGULAR, NEW_RELASE
+		CHILDRENS, REGULAR, NEW_RELEASE
 	}
 	private final String title;
-	private final int priceCode;
+	private final Type priceCode;
 
-	public Movie(String title, int priceCode) {
+	public Movie(String title, Type priceCode) {
 		this.title = title;
 		this.priceCode = priceCode;
 	}
 
-	public int getPriceCode() {
+	public Type getPriceCode() {
 		return priceCode;
 	}
 
