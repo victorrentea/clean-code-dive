@@ -16,8 +16,8 @@ public class ManyParamsOOP {
         validator.m1("a",1, errors);
         validator.m2("b",1, errors);
         validator.m3("file.txt", 1L,"ref", errors);
-        validator.m4("a", 1L,5L, "g", errors);
-        validator.m5(1, errors);
+        validator.m4(errors, "a", 1L,5L, "g");
+        validator.m5(errors, 1);
         if (!errors.isEmpty()) {
             throw new IllegalArgumentException(errors.toString());
         }
@@ -43,10 +43,10 @@ class Validator {
     public void m3(String fileName, long versionId, String reference, List<String> errors) {
         // stuff
     }
-    public void m4(String a, long listId, long recordId, String g, List<String> errors) {
+    public void m4(List<String> errors, String a, long listId, long recordId, String g) {
         // stuff
     }
-    public void m5(int b, List<String> errors) {
+    public void m5(List<String> errors, int b) {
         // stuff
     }
 }
