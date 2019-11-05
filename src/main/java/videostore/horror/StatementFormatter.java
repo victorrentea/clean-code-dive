@@ -1,20 +1,33 @@
 package videostore.horror;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.joining;
 
 public class StatementFormatter {
 
     public String formatStatement(String customerName, List<Rental> rentals) {
-        double totalPrice = 0;
-        int frequentRenterPoints = 0;
-        String result = formatHeader(customerName);
-        for (Rental rental : rentals) {
-            frequentRenterPoints += rental.calculateRenterPoints();
-            result += formatBodyLine(rental);
-            totalPrice += rental.calculatePrice();
-        }
-        result += formatFooter(totalPrice, frequentRenterPoints);
-        return result;
+        return formatHeader(customerName) +
+                formatBody(rentals) +
+                formatFooter(rentals);
+    }
+
+    private String formatBody(List<Rental> rentals) {
+        return rentals.stream().map(this::formatBodyLine).collect(joining());
+    }
+
+    private String formatFooter(List<Rental> rentals) {
+        return "Amount owed is " + calculateTotalPrice(rentals) + "\n" +
+                "You earned " + calculateTotalRenterPoints(rentals) + " frequent renter points";
+    }
+
+    private double calculateTotalPrice(List<Rental> rentals) {
+        return rentals.stream().mapToDouble(Rental::calculatePrice).sum();
+    }
+
+    private int calculateTotalRenterPoints(List<Rental> rentals) {
+        return rentals.stream().mapToInt(Rental::calculateRenterPoints).sum();
     }
 
     private String formatBodyLine(Rental rental) {
@@ -25,8 +38,4 @@ public class StatementFormatter {
         return "Rental Record for " + customerName + "\n";
     }
 
-    private String formatFooter(double totalPrice, int frequentRenterPoints) {
-        return "Amount owed is " + totalPrice + "\n" +
-                "You earned " + frequentRenterPoints + " frequent renter points";
-    }
 }
