@@ -7,7 +7,7 @@ public class ManyParamsVO {
     public void placeOrder(String fName, String lName, String city, String streetName, Integer streetNumber) {
     	if (fName == null || lName == null) throw new IllegalArgumentException();
     	
-    	System.out.println("Some Logic");
+    	System.out.println("Some Logic for " + fName + " " + lName.toUpperCase());
     }
 }
 
@@ -19,6 +19,7 @@ class AnotherClass {
     }
 }
 
+// over the hills and far away ...
 class Person {
     private String firstName;
     private String lastName;
