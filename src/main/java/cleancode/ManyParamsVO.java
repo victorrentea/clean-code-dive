@@ -18,28 +18,33 @@ class FullName {
     public String getLastName() {
         return lastName;
     }
+
     public String concatenated() {
         return firstName + " " + lastName.toUpperCase();
     }
 }
 
+
 public class ManyParamsVO {
     public static void main(String[] args) {
-        new ManyParamsVO().placeOrder(new FullName("John", "Doe"), "St. Albergue", "Paris", 99);
+        Address address = new Address("St. Albergue", "Paris", 99);
+        FullName fullName = new FullName("John", "Doe");
+        new ManyParamsVO().placeOrder(fullName, address);
     }
-    public void placeOrder(FullName fullName, String city, String streetName, Integer streetNumber) {
-    	if (fullName == null) throw new IllegalArgumentException();
 
-    	System.out.println("Some Logic for " +
+    public void placeOrder(FullName fullName, Address address) {
+        if (fullName == null) throw new IllegalArgumentException();
+
+        System.out.println("Some Logic for " +
                 fullName.getFirstName() + " " + fullName.getLastName().toUpperCase());
     }
 }
 
 class AnotherClass {
     public void otherMethod(FullName fullName, int x) {
-    	if (fullName == null) throw new IllegalArgumentException();
+        if (fullName == null) throw new IllegalArgumentException();
 
-    	System.out.println("Another distant Logic");
+        System.out.println("Another distant Logic");
     }
 }
 
