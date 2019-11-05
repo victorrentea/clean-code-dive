@@ -1,53 +1,72 @@
 package cleancode;
 
+//@Embeddable
+class FullName {
+    private final String firstName;
+    private final String lastName;
+
+    public FullName(String firstName, String lastName) {
+        if (firstName == null || lastName == null) throw new IllegalArgumentException();
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+    public String concatenated() {
+        return firstName + " " + lastName.toUpperCase();
+    }
+}
+
 public class ManyParamsVO {
     public static void main(String[] args) {
-        new ManyParamsVO().placeOrder("John", "Doe", "St. Albergue", "Paris", 99);
+        new ManyParamsVO().placeOrder(new FullName("John", "Doe"), "St. Albergue", "Paris", 99);
     }
-    public void placeOrder(String fName, String lName, String city, String streetName, Integer streetNumber) {
-    	if (fName == null || lName == null) throw new IllegalArgumentException();
-    	
-    	System.out.println("Some Logic for " + fName + " " + lName.toUpperCase());
+    public void placeOrder(FullName fullName, String city, String streetName, Integer streetNumber) {
+    	if (fullName == null) throw new IllegalArgumentException();
+
+    	System.out.println("Some Logic for " +
+                fullName.getFirstName() + " " + fullName.getLastName().toUpperCase());
     }
 }
 
 class AnotherClass {
-    public void otherMethod(String firstName, String lastName, int x) {
-    	if (firstName == null || lastName == null) throw new IllegalArgumentException();
-    	
+    public void otherMethod(FullName fullName, int x) {
+    	if (fullName == null) throw new IllegalArgumentException();
+
     	System.out.println("Another distant Logic");
     }
 }
 
-// over the hills and far away ...
-class Person {
-    private String firstName;
-    private String lastName;
 
-    public Person(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        if (firstName == null || lastName == null) throw new IllegalArgumentException();
+// over the hills and far away ...
+//HOLY ENTITY
+class Person {
+    private FullName fullName;
+
+    public Person(FullName fullName) {
+        if (fullName == null) throw new IllegalArgumentException();
         // TODO think: is this sufficient enforcing ?
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public FullName getFullName() {
+        return fullName;
     }
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-    public String getFirstName() {
-        return firstName;
-    }
-    public String getLastName() {
-        return lastName;
-    }
+
 }
 
 class PersonService {
     public void f(Person person) {
-        String fullName = person.getFirstName() + " " + person.getLastName().toUpperCase();
+        String fullName = person.getFullName().concatenated();
+        String fullName2 = person.getFullName().concatenated();
+        String fullName3 = person.getFullName().concatenated();
+        String fullName4 = person.getFullName().concatenated();
+        String fullName5 = person.getFullName().concatenated();
         System.out.println(fullName);
     }
 }
