@@ -3,6 +3,8 @@ package videostore.horror;
 import org.junit.Assert;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+
 
 public class CustomerTest {
 
@@ -20,6 +22,6 @@ public class CustomerTest {
                 + "Amount owed is 32.0\n"
                 + "You earned 4 frequent renter points";
         
-        Assert.assertEquals(expected, customer.statement());
+        assertEquals(expected, customer.statement());
     }
 }
