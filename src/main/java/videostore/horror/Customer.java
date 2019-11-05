@@ -11,14 +11,6 @@ class Customer {
 		this.name = name;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public List<Rental> getRentals() {
-		return rentals;
-	}
-
 	public void addRental(Rental rental) {
 		rentals.add(rental);
 	}
